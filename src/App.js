@@ -6,57 +6,113 @@ import Container from "./components/Container";
 import Sidebar from "./components/Sidebar";
 import About from "./components/About";
 import { GlobalStyle } from "./GlobalStyle";
+import Form from "./components/ProductManagement/Form";
+import Home from "./pages/Home";
+import { UserProvider } from "./contexts/UserContext";
+import { ProductProvider } from "./contexts/ProductContext";
 
 function App() {
   const [isExpanded, setExpanded] = useState("false");
 
   return (
     <>
-      <BrowserRouter>
-        <GlobalStyle />
-        <Wrapper>
-          <div
-            className={isExpanded ? "container expanded" : "container collapse"}
-          >
-            <div className={isExpanded ? "header expanded" : "header collapse"}>
-              <Sidebar isExpanded={isExpanded} setExpanded={setExpanded} />
-            </div>
-            <div className="main">
-              <Routes>
-                <Route path="/" element={<Container />} />
+      <UserProvider>
+        <ProductProvider>
+          <BrowserRouter>
+            <GlobalStyle />
+            <Wrapper>
+              <div
+                className={
+                  isExpanded ? "container expanded" : "container collapse"
+                }
+              >
+                <div
+                  className={isExpanded ? "header expanded" : "header collapse"}
+                >
+                  <Sidebar isExpanded={isExpanded} setExpanded={setExpanded} />
+                </div>
+                <div className="main">
+                  <Container />
+                  {/* <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
-              </Routes>
-            </div>
-          </div>
-        </Wrapper>
-      </BrowserRouter>
+                <Route path="/form" element={<Container />} />
+              </Routes> */}
+                </div>
+              </div>
+            </Wrapper>
+          </BrowserRouter>
+        </ProductProvider>
+      </UserProvider>
     </>
   );
 }
 
 const Wrapper = styled.section`
+  /* border-radius: 1rem; */
+  overflow-x: hidden;
+
   .container {
     display: grid;
   }
   .expanded {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 4fr;
   }
   .collapse {
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 15fr;
   }
   .header {
     min-height: 100vh;
   }
   .header.expanded {
-    background-color: papayawhip;
+    background-color: #1f1e1e;
+    color: #fff;
   }
 
   .header.collapse {
-    background-color: aqua;
+    background-color: #1f1e1e;
+    color: #fff;
   }
 
   .main {
-    background: linear-gradient(rgb(39, 132, 154), rgb(228, 95, 255));
+    background: linear-gradient(#f5f7fa, #c3cfe2);
+    height: 100vh;
+    /* overflow-y: scroll; */
+
+    /* for scrollbar  customazation start */
+    scrollbar-color: rgb(98 84 243);
+    scrollbar-width: thin;
+    section::-webkit-scrollbar {
+      width: 1.5rem;
+    }
+
+    section::-webkit-scrollbar-track {
+      background-color: rgb(24 24 29);
+    }
+
+    section::-webkit-scrollbar-thumb {
+      background: #fff;
+      border: 5px solid transparent;
+      border-radius: 9px;
+      background-clip: content-box;
+    }
+    */
+
+    /* scrollbar customzation end 
+  }
+
+  @media (max-width: 768px) {
+    /* .expanded {
+      grid-template-columns: 1fr 3fr;
+    } */
+    .collapse {
+      grid-template-columns: 1fr 7fr;
+    }
+  }
+  @media (max-width: 959px) {
+    .collapse {
+      grid-template-columns: 1fr 7fr;
+    }
   }
 `;
 

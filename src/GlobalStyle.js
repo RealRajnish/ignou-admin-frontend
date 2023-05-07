@@ -8,6 +8,10 @@ export const GlobalStyle = createGlobalStyle`
   font-family: "Work Sans", sans-serif;
 }
 
+:root {
+  --dark-bg: ##1f1e1e;
+  --white: #ffffff;
+}
 
 html {
   font-size: 62.5%;
