@@ -13,6 +13,7 @@ import ApproveStrayAnimals from "./ProductManagement/ApproveStrayAnimals";
 import AdoptionPage from "../pages/AdoptionPage";
 import PerformancePage from "../pages/PerformancePage";
 import OrdersPage from "../pages/OrdersPage";
+import ViewAppointmentPage from "./ProductManagement/ViewAppointmentPage";
 
 const Container = () => {
   return (
@@ -28,7 +29,7 @@ const Container = () => {
           <Route path="/manageproducts" element={<ManageProducts />} />
           <Route path="/customersPage" element={<CustomersPage />} />
           {/* Routes Ends  */}
-          <Route path="/form" element={<Form />} />
+          {/* <Route path="/form" element={<Form />} /> */}
           <Route path="/AddProducts" element={<Form />} />
           <Route path="/DeleteProducts" element={<DeleteProduct />} />
           <Route path="/ModifyProducts" element={<ModifyProduct />} />
@@ -37,6 +38,7 @@ const Container = () => {
             path="/ApproveStrayAnimals"
             element={<ApproveStrayAnimals />}
           />
+          <Route path="/ViewAppointments" element={<ViewAppointmentPage />} />
         </Routes>
       </div>
     </Wrapper>

@@ -112,6 +112,7 @@ const Sidebar = ({ isExpanded, setExpanded }) => {
 };
 
 const Wrapper = styled.section`
+  /* overflow-x: hidden; */
   /* position: relative; */
   /* .sidebar-nav-btn {
     position: absolute;

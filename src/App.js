@@ -75,7 +75,8 @@ const Wrapper = styled.section`
   }
 
   .main {
-    background: linear-gradient(#f5f7fa, #c3cfe2);
+    /* background: linear-gradient(#f5f7fa, #c3cfe2); */
+    background: #fff;
     height: 100vh;
     /* overflow-y: scroll; */
 
