@@ -5,6 +5,11 @@ const ProductReducer = (state, action) => {
         ...state,
         appointments: action.payload,
       };
+    case "SET_REQ_REGISTER_STRAY_DATA":
+      return {
+        ...state,
+        reqRegisterStray: action.payload,
+      };
 
     default:
       return {

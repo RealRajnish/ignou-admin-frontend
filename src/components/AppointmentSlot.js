@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppointmentContext } from "../contexts/ProductContext";
+import { useProductContext } from "../contexts/ProductContext";
 
 const AppointmentSlot = (width, customWidth) => {
-  const { appointments } = useAppointmentContext();
+  const { appointments } = useProductContext();
   // debugger;
   console.log(customWidth);
 

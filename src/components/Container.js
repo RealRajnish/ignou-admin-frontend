@@ -14,6 +14,7 @@ import AdoptionPage from "../pages/AdoptionPage";
 import PerformancePage from "../pages/PerformancePage";
 import OrdersPage from "../pages/OrdersPage";
 import ViewAppointmentPage from "./ProductManagement/ViewAppointmentPage";
+import ApproveStrayAnimal from "./ProductManagement/ApproveStrayAnimal";
 
 const Container = () => {
   return (
@@ -39,6 +40,10 @@ const Container = () => {
             element={<ApproveStrayAnimals />}
           />
           <Route path="/ViewAppointments" element={<ViewAppointmentPage />} />
+          <Route
+            path="/ApproveStrayAnimal/:id"
+            element={<ApproveStrayAnimal />}
+          />
         </Routes>
       </div>
     </Wrapper>
