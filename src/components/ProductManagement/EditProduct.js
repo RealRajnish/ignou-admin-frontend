@@ -375,7 +375,8 @@ const Wrapper = styled.section`
   }
 
   form {
-    margin-top: 1rem;
+    /* margin-top: 2rem; */
+    margin: 2rem auto;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
