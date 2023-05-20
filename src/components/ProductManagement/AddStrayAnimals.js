@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { API_4 } from "../../contexts/ProductContext";
+import { API_4 } from "../../api/Api";
 
 const AddStrayAnimals = () => {
   const [state, setState] = useState({

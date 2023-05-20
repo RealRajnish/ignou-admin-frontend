@@ -15,6 +15,7 @@ import PerformancePage from "../pages/PerformancePage";
 import OrdersPage from "../pages/OrdersPage";
 import ViewAppointmentPage from "./ProductManagement/ViewAppointmentPage";
 import ApproveStrayAnimal from "./ProductManagement/ApproveStrayAnimal";
+import EditProduct from "./ProductManagement/EditProduct";
 
 const Container = () => {
   return (
@@ -44,6 +45,7 @@ const Container = () => {
             path="/ApproveStrayAnimal/:id"
             element={<ApproveStrayAnimal />}
           />
+          <Route path="/EditProduct/:id" element={<EditProduct />} />
         </Routes>
       </div>
     </Wrapper>

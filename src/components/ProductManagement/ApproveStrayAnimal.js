@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import {
-  API_3,
-  API_2,
-  useProductContext,
-  API_4,
-} from "../../contexts/ProductContext";
-import axios, { Axios } from "axios";
+import { useProductContext } from "../../contexts/ProductContext";
+import axios from "axios";
+import { API_2, API_3, API_4 } from "../../api/Api";
 
 const ApproveStrayAnimal = () => {
   const [id1, setId1] = useState("");

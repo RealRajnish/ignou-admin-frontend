@@ -10,6 +10,16 @@ const ProductReducer = (state, action) => {
         ...state,
         reqRegisterStray: action.payload,
       };
+    case "SET_ALL_PRODUCTS":
+      return {
+        ...state,
+        products: action.payload,
+      };
+    case "SET_SINGLE_PRODUCTS":
+      return {
+        ...state,
+        singleProduct: action.payload,
+      };
 
     default:
       return {

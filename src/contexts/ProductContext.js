@@ -1,24 +1,8 @@
 import axios from "axios";
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 import reducer from "../reducers/ProductReducer";
-import { useNavigate } from "react-router-dom";
+import { API_1, API_2, API_5 } from "../api/Api";
 const ProductContext = createContext();
-
-// for getting all the appointments
-const API_1 = "/viewAppointments";
-const API_2 = "/getReqRegisterStray";
-
-// for deleting stray Animal register Request
-const API_3 = "/delReqRegisterStray";
-
-// For adding stray animals
-const API_4 = "/addStray";
 
 const initialState = {
   products: [],
@@ -69,22 +53,43 @@ const ProductProvider = ({ children }) => {
     }
   };
 
+  // API call 3 for getting all products
+  const getProducts = async (url) => {
+    try {
+      const res = await axios.get(url);
+      const prod = await res.data;
+      dispatch({
+        type: "SET_ALL_PRODUCTS",
+        payload: prod,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSingleProduct = async (url) => {
+    try {
+      const res = await axios.get(url);
+      const prod = await res.data;
+      dispatch({
+        type: "SET_SINGLE_PRODUCTS",
+        payload: prod,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getAppointments(API_1);
     getReqRegisterStray(API_2);
+    getProducts(API_5);
   }, []);
 
-  // const handleDelete = async (id) => {
-  //   try {
-  //     const data = await axios.delete(`${API_3}/${id}`);
-  //     console.log(data);
-  //     // Navigate("/manageproducts");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
   return (
-    <ProductContext.Provider value={{ ...state, getReqRegisterStray }}>
+    <ProductContext.Provider
+      value={{ ...state, getReqRegisterStray, getSingleProduct }}
+    >
       {children}
     </ProductContext.Provider>
   );
@@ -95,11 +100,4 @@ const useProductContext = () => {
   return useContext(ProductContext);
 };
 
-export {
-  ProductProvider,
-  ProductContext,
-  useProductContext,
-  API_3,
-  API_2,
-  API_4,
-};
+export { ProductProvider, ProductContext, useProductContext };
