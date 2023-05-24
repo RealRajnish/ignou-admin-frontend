@@ -16,6 +16,7 @@ import OrdersPage from "../pages/OrdersPage";
 import ViewAppointmentPage from "./ProductManagement/ViewAppointmentPage";
 import ApproveStrayAnimal from "./ProductManagement/ApproveStrayAnimal";
 import EditProduct from "./ProductManagement/EditProduct";
+import ViewOrderInfo from "./ViewOrderInfo";
 
 const Container = () => {
   return (
@@ -46,6 +47,7 @@ const Container = () => {
             element={<ApproveStrayAnimal />}
           />
           <Route path="/EditProduct/:id" element={<EditProduct />} />
+          <Route path="/viewOrder/:id" element={<ViewOrderInfo />} />
         </Routes>
       </div>
     </Wrapper>

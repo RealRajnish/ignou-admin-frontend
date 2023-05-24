@@ -388,6 +388,20 @@ const Wrapper = styled.section`
   textarea {
     min-width: 20rem;
   }
+
+  button {
+    padding: 1rem;
+    color: #fff;
+    background: #3e4959;
+    font-weight: bold;
+    &:hover,
+    &:focus {
+      transform: scale(1.1);
+      cursor: pointer;
+      background: #189bed;
+      transition: all 0.2s;
+    }
+  }
 `;
 
 export default EditProduct;

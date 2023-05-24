@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { API_13 } from "../../api/Api";
 
 const Form = () => {
   const [animalData, setAnimalData] = useState({
@@ -38,26 +39,46 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.post("addSingleProduct", {
-        id: animalData.id,
-        breed: animalData.breed,
-        age: animalData.age,
-        price: animalData.price,
-        colors: [animalData.color1, animalData.color2, animalData.color3],
-        description: animalData.description,
-        category: animalData.category,
-        featured: animalData.featured,
-        shipping: animalData.shipping,
-        stock: animalData.stock,
-        reviews: animalData.reviews,
-        stars: animalData.stars,
-        image: [
-          { id: "random1", url: animalData.image1, filename: "product-1.png" },
-          { id: "random2", url: animalData.image2, filename: "product-2.png" },
-          { id: "random3", url: animalData.image3, filename: "product-3.png" },
-          { id: "random4", url: animalData.image4, filename: "product-4.png" },
-        ],
-      });
+      const data = await axios.post(
+        API_13,
+        {
+          id: animalData.id,
+          breed: animalData.breed,
+          age: animalData.age,
+          price: animalData.price,
+          colors: [animalData.color1, animalData.color2, animalData.color3],
+          description: animalData.description,
+          category: animalData.category,
+          featured: animalData.featured,
+          shipping: animalData.shipping,
+          stock: animalData.stock,
+          reviews: animalData.reviews,
+          stars: animalData.stars,
+          image: [
+            {
+              id: "random1",
+              url: animalData.image1,
+              filename: "product-1.png",
+            },
+            {
+              id: "random2",
+              url: animalData.image2,
+              filename: "product-2.png",
+            },
+            {
+              id: "random3",
+              url: animalData.image3,
+              filename: "product-3.png",
+            },
+            {
+              id: "random4",
+              url: animalData.image4,
+              filename: "product-4.png",
+            },
+          ],
+        },
+        { withCredentials: true }
+      );
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -192,7 +213,7 @@ const Form = () => {
               <input
                 id="stock"
                 name="stock"
-                type="text"
+                type="number"
                 onChange={handleInputs}
               />
             </div>
@@ -201,7 +222,7 @@ const Form = () => {
               <input
                 id="reviews"
                 name="reviews"
-                type="text"
+                type="number"
                 onChange={handleInputs}
               />
             </div>
@@ -210,7 +231,9 @@ const Form = () => {
               <input
                 id="stars"
                 name="stars"
-                type="text"
+                type="number"
+                max="5"
+                min="1"
                 onChange={handleInputs}
               />
             </div>
@@ -261,6 +284,7 @@ const Form = () => {
               type="submit"
               onClick={handleSubmit}
               value="Register Animal"
+              className="submit-btn"
             />
           </div>
         </form>
@@ -270,26 +294,62 @@ const Form = () => {
 };
 
 const Wrapper = styled.section`
-  overflow-y: scroll;
-  max-height: 40rem;
-
-  .image-blocks {
-    background-color: aqua;
-    margin-top: 2rem;
-  }
-  .input-lable {
-    display: flex;
-    justify-content: space-between;
-  }
-  .form-content {
+  font-size: 1.6rem;
+  display: flex;
+  margin: 2rem auto;
+  flex-grow: 1;
+  .add-product--form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-  }
+    flex-grow: 1;
+    max-width: 60rem;
+    margin: 0 auto;
+    justify-content: space-between;
 
-  .add-product--form {
-    /* max-height: 40rem;
-    overflow-y: scroll; */
+    .add-product-form-label {
+      display: grid;
+      place-content: center;
+      padding: 1rem;
+      color: #0ef087;
+      font-size: 2.4rem;
+    }
+    .form-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 1rem;
+
+      .input-lable {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+
+        input {
+          width: 40rem;
+          height: 4rem;
+          padding: 0.5rem;
+        }
+        textarea {
+          min-width: 40rem;
+          padding: 0.5rem;
+        }
+      }
+    }
+    .submit-btn {
+      padding: 1rem;
+      color: #fff;
+      background: #3e4959;
+      font-weight: bold;
+      max-width: 20rem;
+      margin: 2rem;
+      &:hover {
+        transform: scale(1.2);
+        cursor: pointer;
+        background: #189bed;
+      }
+    }
   }
 `;
 export default Form;

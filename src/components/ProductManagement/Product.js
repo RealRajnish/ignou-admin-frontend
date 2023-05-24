@@ -12,8 +12,8 @@ const Product = ({ id, category, image, breed, price }) => {
               className="fill box"
               src={image}
               alt=""
-              width={100}
-              height={100}
+              width={80}
+              height={80}
             />
           </figure>
         </div>
@@ -37,8 +37,11 @@ const Wrapper = styled.article`
 
   .outer-div {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin: 1rem;
+    padding: 0.5rem;
   }
   .box {
     min-width: 10rem;
@@ -50,6 +53,21 @@ const Wrapper = styled.article`
     display: flex;
     flex-wrap: wrap;
     flex-grow: 1;
+    justify-content: space-between;
+  }
+
+  button {
+    padding: 1rem;
+    color: #fff;
+    background: #3e4959;
+    font-weight: bold;
+    &:hover,
+    &:focus {
+      transform: scale(1.2);
+      cursor: pointer;
+      background: #189bed;
+      transition: all 0.2s;
+    }
   }
 `;
 export default Product;

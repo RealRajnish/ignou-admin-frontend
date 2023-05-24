@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useReducer, useEffect } from "react";
 import reducer from "../reducers/ProductReducer";
-import { API_1, API_2, API_5 } from "../api/Api";
+import { API_1, API_11, API_2, API_5 } from "../api/Api";
+import { useUserContext } from "./UserContext";
 const ProductContext = createContext();
 
 const initialState = {
@@ -11,17 +12,22 @@ const initialState = {
   singleStray: {},
   appointments: [],
   reqRegisterStray: [],
+  adoptionReq: [],
 };
 
 const ProductProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   // const Navigate = useNavigate();
 
+  const { userLoggedIn } = useUserContext();
+
   // API_1 call for getting all appointments
   const getAppointments = async (url) => {
     // dispatch({ type: "SET_LOADING" });
     try {
-      const res = await axios.get(url);
+      const res = await axios.get(url, {
+        withCredentials: true,
+      });
       const appointments = await res.data;
       // console.log(prodocts);
       dispatch({
@@ -80,15 +86,35 @@ const ProductProvider = ({ children }) => {
     }
   };
 
+  // For getting all Adoption Requests
+  const getAdoptReq = async (url) => {
+    try {
+      const res = await axios.get(url, { withCredentials: true });
+      dispatch({
+        type: "SET_ADOPT_REQ",
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getAppointments(API_1);
     getReqRegisterStray(API_2);
     getProducts(API_5);
+    getAdoptReq(API_11);
   }, []);
 
   return (
     <ProductContext.Provider
-      value={{ ...state, getReqRegisterStray, getSingleProduct }}
+      value={{
+        ...state,
+        getReqRegisterStray,
+        getSingleProduct,
+        getAppointments,
+        getProducts,
+      }}
     >
       {children}
     </ProductContext.Provider>

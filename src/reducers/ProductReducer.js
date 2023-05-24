@@ -20,6 +20,11 @@ const ProductReducer = (state, action) => {
         ...state,
         singleProduct: action.payload,
       };
+    case "SET_ADOPT_REQ":
+      return {
+        ...state,
+        adoptionReq: action.payload,
+      };
 
     default:
       return {

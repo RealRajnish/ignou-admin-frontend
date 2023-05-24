@@ -17,4 +17,35 @@ const API_6 = "/reqSingleProducts";
 // For editing our product
 const API_7 = "/editProduct";
 
-export { API_1, API_2, API_3, API_4, API_5, API_6, API_7 };
+// For loging for admin
+const API_8 = "/adminSignIn";
+
+// For gettng All orders
+const API_9 = "/getAllOrders";
+
+// For getting all Users (Clients)
+const API_10 = "/getAllUsers";
+
+// Get all Adoption Request
+const API_11 = "/getAllAdoptionReq";
+
+// for deleting product by id
+const API_12 = "/deleteProductById";
+
+// For adding single product data
+const API_13 = "/addSingleProduct";
+export {
+  API_1,
+  API_2,
+  API_3,
+  API_4,
+  API_5,
+  API_6,
+  API_7,
+  API_8,
+  API_9,
+  API_10,
+  API_11,
+  API_12,
+  API_13,
+};

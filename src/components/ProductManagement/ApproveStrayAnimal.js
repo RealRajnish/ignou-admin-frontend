@@ -69,6 +69,7 @@ const ApproveStrayAnimal = () => {
 
   return (
     <Wrapper>
+      <div className="text">Approve or Reject Stray Animal Registration</div>
       <div className="form-container">
         <form action="" onSubmit={(e) => e.preventDefault()}>
           <div className="input-box">
@@ -131,17 +132,81 @@ const ApproveStrayAnimal = () => {
               onChange={(e) => setImage(e.target.value)}
             />
           </div>
-          <button type="submit" onClick={() => handleAccept(data._id)}>
-            Accept
-          </button>
-          <button type="submit" onClick={() => handleDelete(data._id)}>
-            Delete
-          </button>
+          <div className="btn-container">
+            <button type="submit" onClick={() => handleAccept(data._id)}>
+              Accept
+            </button>
+            <button
+              type="submit"
+              className="dlt"
+              onClick={() => handleDelete(data._id)}
+            >
+              Delete
+            </button>
+          </div>
         </form>
       </div>
     </Wrapper>
   );
 };
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  margin: 0 auto;
+  padding: 2rem 0;
+  font-size: 1.6rem;
+  .text {
+    font-size: 2.4rem;
+    color: #0ef087;
+    display: grid;
+    place-content: center;
+  }
+
+  .form-container {
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 60rem;
+      margin: 1rem auto;
+      .input-box {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 1rem;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        input {
+          width: 40rem;
+          height: 4rem;
+          padding: 0.5rem;
+        }
+      }
+      .btn-container {
+        display: flex;
+        gap: 2rem;
+        margin: 1rem;
+      }
+    }
+  }
+  button {
+    padding: 1rem;
+    color: #fff;
+    background: #3e4959;
+    font-weight: bold;
+    max-width: 8rem;
+    &:hover,
+    &:focus {
+      transform: scale(1.2);
+      cursor: pointer;
+      background: #189bed;
+      transition: all 0.2s;
+    }
+  }
+
+  button.dlt {
+    &:hover,
+    &:focus {
+      background: red;
+    }
+  }
+`;
 export default ApproveStrayAnimal;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import styled from "styled-components";
@@ -8,8 +8,31 @@ import { MdLogout } from "react-icons/md";
 import { BsPersonLinesFill } from "react-icons/bs";
 import { HiCurrencyRupee, HiDocumentReport } from "react-icons/hi";
 import { MdOutlinePets } from "react-icons/md";
+import { FaUserAlt } from "react-icons/fa";
+import axios from "axios";
+import { API_1, API_8 } from "../api/Api";
+import { useUserContext } from "../contexts/UserContext";
+import { useProductContext } from "../contexts/ProductContext";
 
 const Sidebar = ({ isExpanded, setExpanded }) => {
+  const [pass, setPass] = useState();
+  const { setLoggedInStatus, userLoggedIn, setLogOut } = useUserContext();
+  const { getAppointments } = useProductContext();
+
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(API_8, { user: "ADMIN", password: pass });
+      console.log(res);
+      if (res.data.code == 3) {
+        setLoggedInStatus();
+        setPass("");
+        getAppointments(API_1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Wrapper>
       <div className="container1">
@@ -20,19 +43,37 @@ const Sidebar = ({ isExpanded, setExpanded }) => {
               : "sidebar-nav-btn box-1"
           }
         >
-          <div className="top-nav">
-            <div className="admin-text">ADMIN</div>{" "}
-            <div className="menu-btn">
-              <GiHamburgerMenu
-                className="menu-btn"
-                onClick={() => {
-                  setExpanded(!isExpanded);
-                }}
+          <GiHamburgerMenu
+            className="menu-btn"
+            onClick={() => {
+              setExpanded(!isExpanded);
+            }}
+          />
+        </div>
+        <div className={isExpanded ? "box-2 d-block" : "box-2 d-none"}>
+          <FaUserAlt />
+          <p>ADMIN</p>
+          <div className="toggle">
+            {/* <LoginToggle /> */}
+
+            <div
+              className={userLoggedIn ? "toggle-1 d-none" : "toggle-1 d-flex"}
+            >
+              <input
+                type="password"
+                placeholder="Enter Password"
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
               />
+              <button onClick={handleLogin}>Login</button>
+            </div>
+            <div
+              className={!userLoggedIn ? "toggle-2 d-none" : "toggle-2 d-flex"}
+            >
+              <MdLogout onClick={setLogOut} />
             </div>
           </div>
         </div>
-        <div className="box-2">rgrdf</div>
         <div
           className={
             isExpanded ? "expanded nav-links box-3" : "nav-links box-3"
@@ -104,7 +145,7 @@ const Sidebar = ({ isExpanded, setExpanded }) => {
           </nav>
         </div>
         <div className="box-4">
-          <MdLogout />
+          <MdLogout onClick={setLogOut} />
         </div>
       </div>
     </Wrapper>
@@ -143,21 +184,16 @@ const Wrapper = styled.section`
     flex-basis: 100%;
   }
 
-  .box-1 {
+  .box-1.sidebar-nav-btn {
     display: flex;
-    flex-direction: row;
-    /* flex-grow: 1; */
-    justify-content: end;
-    /* flex: 0 1 auto; */
+    align-items: center;
+    justify-content: center;
+    font-size: 3.2rem;
+    padding: 1rem;
+  }
 
-    .admin-text {
-      display: none;
-    }
-
-    .top-nav {
-      display: flex;
-      font-size: 3.2rem;
-    }
+  .box-1.sidebar-nav-btn.expanded {
+    justify-content: flex-end;
   }
 
   .box-2 {
@@ -195,12 +231,6 @@ const Wrapper = styled.section`
     padding: 1rem;
   }
 
-  .sidebar-nav-btn.expanded {
-    .admin-text {
-      display: inline-block;
-    }
-  }
-
   .expanded.nav-links {
     .text {
       display: inline-block;
@@ -222,45 +252,6 @@ const Wrapper = styled.section`
       }
     }
   }
-  /*
-  nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    flex-grow: 1;
-    /* min-height: 100vh; */
-  /* ul {
-      list-style-type: none;
-    }
-    ul li {
-      text-decoration: none;
-      list-style-type: none;
-
-      .text {
-        list-style: none;
-        padding: 1rem;
-        font-size: 2rem;
-        display: none;
-      }
-    }
-  }
-
-  .navlinks {
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  .expanded.nav-links {
-    nav ul li .navlinks .text {
-      display: inline-block;
-    }
-  }
-
-  .navlinks .icon {
-    font-size: 3.2rem;
-  } */
 
   a:link {
     text-decoration: none;
@@ -268,6 +259,59 @@ const Wrapper = styled.section`
   }
   a:visited {
     color: var(--white);
+  }
+
+  .toggle,
+  .box-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .box-2.d-none {
+    display: none;
+  }
+
+  .box-2.d-block {
+    display: flex;
+  }
+
+  .toggle-2.d-none,
+  .toggle-1.d-none {
+    display: none;
+  }
+  .toggle-1.d-flex,
+  .toggle-2.d-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    input {
+      min-height: 2.5rem;
+      padding: 0.5rem;
+    }
+    button {
+      padding: 1rem;
+      color: #fff;
+      background: #e900ff;
+      font-weight: bold;
+      &:hover,
+      &:focus {
+        transform: scale(0.9);
+        cursor: pointer;
+        background: #189bed;
+        transition: all 0.2s;
+      }
+    }
+  }
+
+  .icon:hover {
+    text-shadow: 2px 2px 5px #fff;
+  }
+
+  .text:hover {
+    text-shadow: 5px 5px 5px #fff;
   }
 `;
 

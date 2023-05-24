@@ -43,6 +43,7 @@ const AddStrayAnimals = () => {
 
   return (
     <Wrapper>
+      <div className="text">Add Stray Animal Page</div>
       <div className="main">
         <div className="input-container">
           <div className="lable">
@@ -136,6 +137,55 @@ const AddStrayAnimals = () => {
   );
 };
 
-const Wrapper = styled.section``;
+const Wrapper = styled.section`
+  margin: 0 auto;
+  padding: 2rem 0;
+  font-size: 1.6rem;
+  .text {
+    font-size: 2.4rem;
+    color: #0ef087;
+    display: grid;
+    place-content: center;
+  }
+  .main {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 60rem;
+    margin: 0 auto;
+
+    border-radius: 5rem;
+    .input-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+
+      input {
+        width: 40rem;
+        height: 4rem;
+        padding: 0.5rem;
+      }
+    }
+  }
+
+  button {
+    padding: 1rem;
+    color: #fff;
+    background: #3e4959;
+    font-weight: bold;
+    &:hover,
+    &:focus {
+      transform: scale(1.2);
+      cursor: pointer;
+      background: #189bed;
+      transition: all 0.2s;
+    }
+  }
+`;
 
 export default AddStrayAnimals;

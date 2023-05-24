@@ -10,6 +10,7 @@ import Form from "./components/ProductManagement/Form";
 import Home from "./pages/Home";
 import { UserProvider } from "./contexts/UserContext";
 import { ProductProvider } from "./contexts/ProductContext";
+import { OrderProvider } from "./contexts/OrderContext";
 
 function App() {
   const [isExpanded, setExpanded] = useState("false");
@@ -18,30 +19,37 @@ function App() {
     <>
       <UserProvider>
         <ProductProvider>
-          <BrowserRouter>
-            <GlobalStyle />
-            <Wrapper>
-              <div
-                className={
-                  isExpanded ? "container expanded" : "container collapse"
-                }
-              >
+          <OrderProvider>
+            <BrowserRouter>
+              <GlobalStyle />
+              <Wrapper>
                 <div
-                  className={isExpanded ? "header expanded" : "header collapse"}
+                  className={
+                    isExpanded ? "container expanded" : "container collapse"
+                  }
                 >
-                  <Sidebar isExpanded={isExpanded} setExpanded={setExpanded} />
-                </div>
-                <div className="main">
-                  <Container />
-                  {/* <Routes>
+                  <div
+                    className={
+                      isExpanded ? "header expanded" : "header collapse"
+                    }
+                  >
+                    <Sidebar
+                      isExpanded={isExpanded}
+                      setExpanded={setExpanded}
+                    />
+                  </div>
+                  <div className="main">
+                    <Container />
+                    {/* <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/form" element={<Container />} />
               </Routes> */}
+                  </div>
                 </div>
-              </div>
-            </Wrapper>
-          </BrowserRouter>
+              </Wrapper>
+            </BrowserRouter>
+          </OrderProvider>
         </ProductProvider>
       </UserProvider>
     </>
